@@ -13,5 +13,6 @@ public class Member {
 	private String password;
 	private String memberMail;
 	
+	private int enabled; //인증확인여부
 	private String authKey; //이메일 인증키
 }
