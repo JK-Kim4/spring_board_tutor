@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -59,6 +61,7 @@ public class MemberController {
 			int result = memberService.enrollMember(member);
 			//02. 입력정보 DB에 저장이 성공된 경우 인증메일 발송
 			if(result > 0) {
+				StringBuffer content = new StringBuffer();
 				MimeMessage msg = mailSender.createMimeMessage();
 				MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
 				
@@ -66,6 +69,12 @@ public class MemberController {
 				msgHelper.setSubject(member.getMemberId() + "님 회원가입 인증 메일입니다.");
 				//본문
 				//enabled값을 변경하는 method의 url을 포함하여 메일을 전송, 클릭 시 회원가입이 완료되도록 수정
+				content.append("<hmtl>");
+				content.append("<h1>회원가입을 원하시면 아래의 URL을 클릭하여 주세요.</h1>");
+				content.append("<br>");
+				content.append("<a href='#'>URL이 입력될 자리</a>");
+				content.append("</hmtl>");
+				msgHelper.setText(content.toString(), true);
 				
 				//메일 전송
 				msgHelper.setTo(member.getMemberMail());
@@ -76,5 +85,13 @@ public class MemberController {
 			e.printStackTrace();
 			log.debug("메일 전송에 실패하였습니다.");
 		}
+	}
+	
+	//crossOrigin을 사용하여 email을 통하여 전송된 정보를 수집,
+	// -> 추 후에는 port번호를 할당할 필요가 있음
+	@CrossOrigin
+	@GetMapping("emailCert/{memberId}")
+	public void emailCert() {
+		
 	}
 }
