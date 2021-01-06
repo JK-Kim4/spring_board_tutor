@@ -5,8 +5,8 @@
 
 --=======================================================
 --
---drop table member;
---drop table board;
+drop table member;
+drop table board;
 --
 
 

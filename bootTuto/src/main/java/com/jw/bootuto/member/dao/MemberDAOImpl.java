@@ -17,5 +17,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert("member.enrollMember", member);
 	}
 
+	@Override
+	public int emailCert(String memberId) {
+		return sqlSession.update("member.emailCert", memberId);
+	}
+	
+	
+
 	
 }

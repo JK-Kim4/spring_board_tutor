@@ -14,5 +14,13 @@
 			default
 		)
 	</insert>
+	
+	<update id="emailCert">
+		update 
+			member
+		set
+			enabled = 1
+		where member_id = #{memberId}
+	</update>
 
 </mapper>

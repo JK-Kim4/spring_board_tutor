@@ -16,6 +16,13 @@ public class MemberServiceImpl implements MemberService {
 	public int enrollMember(Member member) {
 		return memberDAO.enrollMember(member);
 	}
+
+	@Override
+	public int emailCert(String memberId) {
+		return memberDAO.emailCert(memberId);
+	}
+	
+	
 	
 	
 }

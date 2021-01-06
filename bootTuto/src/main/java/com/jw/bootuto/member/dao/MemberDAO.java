@@ -6,4 +6,6 @@ public interface MemberDAO {
 
 	int enrollMember(Member member);
 
+	int emailCert(String memberId);
+
 }

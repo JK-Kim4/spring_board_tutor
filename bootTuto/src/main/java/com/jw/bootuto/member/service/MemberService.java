@@ -6,4 +6,6 @@ public interface MemberService {
 
 	int enrollMember(Member member);
 
+	int emailCert(String memberId);
+
 }
